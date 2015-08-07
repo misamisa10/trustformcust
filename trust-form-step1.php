@@ -45,10 +45,10 @@ print<<<EOF
 	   <h2>詳細設定</h2>
 	   <form action='' method="POST">
 	   <p>
-	   <div>trustFormの情報
+	   <div>固定ページのページID(trustFormを設置している固定ページのID)
 	   <input type='text' name='trustForm' value=""></div>
 
-	   <div>固定ページのページID
+	   <div>固定ページのページID(応募フォームを設置する固定ページのID)
 	   <input type='text' name='pageid' value=""></div>
 	   <input type='hidden' name='step' value='2'>
 	   <input type='hidden' name='table' value='$table'>

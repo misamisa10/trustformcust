@@ -23,11 +23,7 @@ while($contents = fgetcsv($fp, 256 )){$j++;
 	}
 }
 fclose($fp);
-/*
-$wpdbのデータベース名をデータベースに合わせて手動で変更すること！！
-＊接頭語「wp_」は不要なので注意！！
-/var/www/html/wordpress/wp-includes/wp-db.php の208行目にデータベース名を追加すること。
-*/
+
 //mysqlを使用するためのグローバル関数定義（定義済み）
 global $wpdb;
 $wp_table = "wp_".$table;
@@ -56,17 +52,14 @@ if($qserial->count==1)
 {
 echo "<p>シリアル番号【".$qserial->serial."】は既に応募済みです。再度シリアル番号をお確かめください。</p>";
 }else{
+
 //発行するsql文の作成
-/****** [tsuri_3rd_single]の部分を登録したデータベースの名前に変更する ******/
 $sql = sprintf("UPDATE %s SET count=1 WHERE serial='%s'", $wp_table, $serial);
 
 //sqlの実行
 $update_count = $wpdb->query($sql);
 
 //応募フォームへのリダイレクト
-//$url = sprintf("http://54.64.83.95/wordpress/?page_id=456", $serial);
-//wp_redirect($url,303);
-//exit;
 echo do_shortcode($trustform);
 exit;
 }
@@ -75,13 +68,13 @@ exit;
 
 ?>
 
-<!-- 製品価格検索フォーム -->
+<!-- シリアル検索フォーム -->
 <?php
 echo '<form class="" id="" role="search" action="./" method="get">'; 
 echo '<input type="hidden" name="page_id" value="'.$page_id.'" />';
 echo '<div>';
 
-//<!-- キーワード入力欄 -->
+//<!-- シリアル入力欄 -->
 echo '<label for="search_box">シリアルナンバーを入力してください。</label>';
 echo '<input class="" id="search_box" type="text" name="keyword" placeholder="" maxlength="7"  value="'.$serial.'" />';
 
@@ -96,6 +89,6 @@ echo '<p>';
 echo $message;
 echo '</p>';
 }
-
+//ショートコードで実行
 add_shortcode('TrustFormCustom', 'TrustFormCustom');
 ?>
